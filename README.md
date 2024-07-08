@@ -28,59 +28,75 @@ Elizabeth Takury y Natalia Alejandro.
  
 # Descripción de las variables del dataset
 # Trackinspotify
--track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
+- track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 
--track_name: Nombre de la canción
+- track_name: Nombre de la canción
 
--artist(s)_name: Nombre del artista(s) de la canción
+- artist(s)_name: Nombre del artista(s) de la canción
 
--artist_count: Número de artistas que contribuyen a la canción.
+- artist_count: Número de artistas que contribuyen a la canción.
 
--released_year: Año en que se lanzó la canción.
+- released_year: Año en que se lanzó la canción.
 
--released_month: Mes en el que se lanzó la canción.
+- released_month: Mes en el que se lanzó la canción.
 
--released_day: Día del mes en que se lanzó la canción.
+- released_day: Día del mes en que se lanzó la canción.
 
--inspotifyplaylists: Número de listas de reproducción de Spotify en las que está incluida la canción
+- inspotifyplaylists: Número de listas de reproducción de Spotify en las que está incluida la canción
 
--inspotifycharts: Presencia y ranking de la canción en las listas de Spotify
+- inspotifycharts: Presencia y ranking de la canción en las listas de Spotify
 
 - streams: Número total de transmisiones en Spotify. Representa la cantidad de veces que la canción fue escuchada.
 # Trackincompetition
-track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
-inappleplaylists: número de listas de reproducción de Apple Music en las que está incluida la canción
-inapplecharts: Presencia y rango de la canción en las listas de Apple Music
-indeezerplaylists: Número de listas de reproducción de Deezer en las que está incluida la canción
-indeezercharts: Presencia y rango de la canción en las listas de Deezer
-inshazamcharts: Presencia y rango de la canción en las listas de Shazam
+
+- track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
+
+- inappleplaylists: número de listas de reproducción de Apple Music en las que está incluida la canción
+
+- inapplecharts: Presencia y rango de la canción en las listas de Apple Music
+
+- indeezerplaylists: Número de listas de reproducción de Deezer en las que está incluida la canción
+
+- indeezercharts: Presencia y rango de la canción en las listas de Deezer
+
+- inshazamcharts: Presencia y rango de la canción en las listas de Shazam
 # Tracktechnicalinfo
-track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
-bpm: Pulsaciones por minuto, una medida del tiempo de la canción.
-key: Clave musical de la canción
-mode: Modo de la canción (mayor o menor)
-danceability_%: Porcentaje que indica qué tan adecuada es la canción para bailar
-valence_: Positividad del contenido musical de la canción.
-energy_: Nivel de energía percibido de la canción.
-acusticness_: Cantidad de sonido acústico en la canción.
-instrumentality_: Cantidad de contenido instrumental en la canción.
-liveness_: Presencia de elementos de actuación en vivo.
-speechiness_: Cantidad de palabras habladas en la canción.
+- track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
+
+- bpm: Pulsaciones por minuto, una medida del tiempo de la canción.
+
+- key: Clave musical de la canción
+
+- mode: Modo de la canción (mayor o menor)
+
+- danceability_%: Porcentaje que indica qué tan adecuada es la canción para bailar
+
+- valence_: Positividad del contenido musical de la canción.
+
+- energy_: Nivel de energía percibido de la canción.
+
+- acusticness_: Cantidad de sonido acústico en la canción.
+
+- instrumentality_: Cantidad de contenido instrumental en la canción.
+
+- liveness_: Presencia de elementos de actuación en vivo.
+
+- speechiness_: Cantidad de palabras habladas en la canción.
 # Procesamiento y análisis:
 # -Procesar y preparar base de datos.
 Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para proceder con la depuración de los datos. 
 
-*Se identificó valores nulos y valores duplicados, además de carácteres raros. 
+* Se identificó valores nulos y valores duplicados, además de carácteres raros. 
 
-*Se identificaron las variables key y mode dentro de la tabla de technical info que no son útiles dentro de mi análisis. 
+* Se identificaron las variables key y mode dentro de la tabla de technical info que no son útiles dentro de mi análisis. 
 
-*Se identifivó y modificó la variable streams la cual estaba en formato texto pero debería estar en formato número. 
+* Se identifivó y modificó la variable streams la cual estaba en formato texto pero debería estar en formato número. 
 
-*Se crearon nuevas variables:
+* Se crearon nuevas variables:
 1. fecha_released: concatenando día, mes y año. 
 2. totak_playlist: sumando in_spotify_playlists e in_spotify_charts.
 
-*Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
+* Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
 
 # -Hacer un análisis exploratorio (AED).
 1.  Agrupar datos según variables categóricas.
