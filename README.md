@@ -61,21 +61,13 @@ speechiness_: Cantidad de palabras habladas en la canción.
 # -Procesar y preparar base de datos.
 Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para proceder con la depuración de los datos. 
 *Se identificó valores nulos y valores duplicados, además de carácteres raros. 
-SELECT
-track_name,
-REGEXP_REPLACE(track_name, r'[^a-zA-Z0-9\s]', ' ') AS track_name_limpio
-artist_s__name,
-REGEXP_REPLACE(artist_s__name,r'[^a-zA-Z0-9\s]', ' ') AS artist_s__name_limpio,
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.track_in_spotify`
 *Se identificaron las variables key y mode dentro de la tabla de technical info que no son útiles dentro de mi análisis. 
+*Se identifivó y modificó la variable streams la cual estaba en formato texto pero debería estar en formato número. 
+*Se crearon nuevas variables:
+1. fecha_released: concatenando día, mes y año. 
+2. totak_playlist: sumando in_spotify_playlists e in_spotify_charts.
+*Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
 
-4.Identificar y manejar datos fuera del alcance del análisis
-5.Identificar y manejar datos discrepantes en variables categóricas. 
-6.Identificar y manejar datos discrepantes en variables numéricas
-7.Comprobar y cambiar tipo de dato.
-8.Crear nuevas variables.
-9.Unir tablas
-10.Construir tablas auxiliares.
 # -Hacer un análisis exploratorio (AED).
 1.  Agrupar datos según variables categóricas.
 2.  Agrupar variables por categorías.
