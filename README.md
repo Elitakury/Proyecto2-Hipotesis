@@ -28,16 +28,16 @@ Elizabeth Takury y Natalia Alejandro.
  
 # Descripción de las variables del dataset
 # Trackinspotify
-track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
-track_name: Nombre de la canción
-artist(s)_name: Nombre del artista(s) de la canción
-artist_count: Número de artistas que contribuyen a la canción.
-released_year: Año en que se lanzó la canción.
-released_month: Mes en el que se lanzó la canción.
-released_day: Día del mes en que se lanzó la canción.
-inspotifyplaylists: Número de listas de reproducción de Spotify en las que está incluida la canción
-inspotifycharts: Presencia y ranking de la canción en las listas de Spotify
-streams: Número total de transmisiones en Spotify. Representa la cantidad de veces que la canción fue escuchada.
+-track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
+-track_name: Nombre de la canción
+-artist(s)_name: Nombre del artista(s) de la canción
+-artist_count: Número de artistas que contribuyen a la canción.
+-released_year: Año en que se lanzó la canción.
+-released_month: Mes en el que se lanzó la canción.
+-released_day: Día del mes en que se lanzó la canción.
+-inspotifyplaylists: Número de listas de reproducción de Spotify en las que está incluida la canción
+-inspotifycharts: Presencia y ranking de la canción en las listas de Spotify
+- streams: Número total de transmisiones en Spotify. Representa la cantidad de veces que la canción fue escuchada.
 # Trackincompetition
 track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 inappleplaylists: número de listas de reproducción de Apple Music en las que está incluida la canción
