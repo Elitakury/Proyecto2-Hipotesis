@@ -87,8 +87,8 @@ Elizabeth Takury y Natalia Alejandro.
 - liveness_: Presencia de elementos de actuación en vivo.
 
 - speechiness_: Cantidad de palabras habladas en la canción.
-# Procesamiento y análisis:
-# -Procesar y preparar base de datos.
+# Procesamiento y preparación de datos:
+
 Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para proceder con la depuración de los datos. 
 
 * Se identificó valores nulos y valores duplicados, además de carácteres raros.
@@ -101,8 +101,6 @@ Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para 
 
 * Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
 
-![alt text](imagen1.png)
-
 * Se crearon nuevas variables:
 
 1. fecha_released: concatenando día, mes y año. 
@@ -113,99 +111,79 @@ Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para 
 
 4. Cuartiles y categoría: Se asignó según la segmentación de cuartiles la categoría "alto" y "bajo" a cada característica de canción de la tabla technical info de la siguiente forma:
 
-![alt text](imagen2.png)
-
-# -Hacer un análisis exploratorio (AED).
+# Visualización y análisis de datos
 * Importamos datos desde BigQuery hacia PowerBi.
 
 * Se realizó ténicas de agrupación según variables categóricas, obteniendo la cantidad de canciones por artista y por año de lanzamiento. Obtenemos la siguiente tabla:
 
-![alt text](imagen3.png)
+![alt text](imagen1.png)
 
 * Se aplicó medidas de tendencia central con la ayuda del lenguaje de Python para visualizar distribución a través de un histograma:
 
-![alt text](imagen4.png)
+  * Histograma BPM:
+  Muestra la distribución de BPM en el conjunto de datos. Los BPM varían entre 75 y 200, con una mayor concentración en los rangos más bajos. Esto sugiere que las canciones con BPM más lentos son más comunes en el conjunto de datos.
 
-![alt text](imagen5.png)
+![alt text](imagen2.png)
 
-* Identificar los artistas con más número de canciones, más streams y presencia en mayor número de playlist: Creación de una matriz, filas - variable artists_name, valores -count of track_name, SUM stremas_int64 y SUM total_playlists.
-
-![alt text](imagen6.png)
-
-* Identificar las canciones con más streams, en mayor número de playlist:creacion de una matriz, fila- track_name, valores- SUM de streams_int64 y SUM total_playlist.
-
-![alt text](imagen7.png)
+ * Histograma Streams:
+ Muestra la frecuencia en la cantidad de veces que una canción fue escuchada. En su mayoría están concentradas en el primer intervalo (lado izquierdo) esto sugiere que 
+![alt text](imagen3.png)
 
 # -Presentación de resultados.
 # Resultados: 
 Validación de hipótesis 
 # * Hipótesis 1: Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify 
 
-Consulta:
-
-SELECT CORR (bpm,streams_int64) AS corr_hip1
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view` 
+![alt text](imagen4.png)
 
 Respuesta: Se rechaza la hipótesis de que las canciones con un mayor BPM tienen más éxito en términos de cantidad de streams en Spotify, ya que el valor de la correlación obtenido (-0.002336203586) indica que no existe una relación significativa entre estas variables.
 
 # * Hipótesis 2: Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.
 
-Consultas:
+![alt text](imagen5.png)
 
-SELECT CORR (in_spotify_charts,in_deezer_charts) AS corr_hip2
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view`
+![alt text](imagen6.png)
 
-SELECT CORR (in_spotify_charts,in_apple_charts) AS corr_hip2_a
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view` 
-
-SELECT CORR (in_spotify_charts, in_shazam_charts) AS corr_hip2_b
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view` 
+![alt text](imagen7.png)
 
 Respuesta:  La hipótesis es aceptada, porque los valores de las correlaciones, que son 0.5999860553480 para Deezer, 0.5515564831921 para Apple Music, y 0.605488541573 para Shazam, indican una relación moderada a fuerte, lo que sugiere que las canciones populares en Spotify tienden a ser populares también en estas otras plataformas.
 
 # * Hipótesis 3: La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.
 
-Consulta: 
-
-SELECT CORR (total_playlists,streams_int64) AS corr_hip3
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view` 
+![alt text](imagen8.png)
 
 Respuesta: El valor de la correlación obtenido (0.783568569951) indica una relación fuerte y positiva, sugiriendo que las canciones que aparecen en más playlists tienden a tener más streams.
 
 # * Hipótesis 4: Los artistas con un mayor número de canciones en Spotify tienen más streams.
 
-Consulta:
-
-SELECT CORR (in_spotify_playlists, streams_int64) AS corr_hip4
-FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view` 
+![alt text](imagen9.png)
 
 Respuesta: Dado que el valor de la correlación es alto (0.77892616317456), podemos concluir que existe una relación fuerte y positiva entre el número de canciones que un artista tiene en Spotify y la cantidad total de streams que recibe. Esto sugiere que los artistas con más canciones tienden a tener más streams.
 
 # * Hipótesis 5: Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
 
-Consulta: 
+ # Streams con danceability: -0.105501164099
 
-SELECT
-  CORR(`danceability_%`, streams_int64) AS corr_danceability,
-  CORR(`valence_%`, streams_int64) AS corr_valence,
-  CORR(`acousticness_%`, streams_int64) AS corr_acousticness,
-  CORR(`energy_%`, streams_int64) AS corr_energy,
-  CORR(`instrumentalness_%`, streams_int64) AS corr_instrumentalness,
-  CORR(`liveness_%`, streams_int64) AS corr_liveness,
-  CORR(`speechiness_%`, streams_int64) AS corr_speechiness
-FROM
-  `proyecto2-hipotesis-426821.Dataset_hipotesis.consolidado_view`
+![alt text](imagen10.png)
+
+ # Streams con valency: -0.041370563742
+
+ ![alt text](imagen11.png)
+
+# Streams con acousticness: -0.0052737047472
+
+ ![alt text](imagen12.png)
+
+# Streams con energy: -0.025626822823
+
+ ![alt text](imagen13.png)
+
 
 Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy bajos, lo cual indica que no existe una relación significativa entre estas características de las canciones y su éxito en términos de cantidad de streams en Spotify. Ninguna de las características evaluadas parece tener un impacto considerable en el número de streams.
 Los valores de correlación obtenidos son:
 
-Danceabilidad: -0.105501164099
 
-Valencia: -0.041370563742
 
-Acousticness: -0.0052737047472
-
-Energy: -0.025626822823
 
 Instrumentalness: -0.04423444890059
 
