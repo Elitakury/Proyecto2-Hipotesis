@@ -5,10 +5,15 @@ Una discográfica se enfrenta al emocionante desafío de lanzar un nuevo artista
 Explorar un conjunto de datos con el fin de identificar patrones o características que puedan determinar los factores que contribuyen al éxito de una canción teniendo como herramienta 
 un extenso dataset de Spotify con información sobre las canciones más escuchadas en 2023.
 Las respuestas obtenidas nos ayudarán a realizar la validación de las siguientes hipótesis:
+
 1.Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify.
+
 2.Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.
+
 3.La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.
+
 4.Los artistas con un mayor número de canciones en Spotify tienen más streams.
+
 5.Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
 
 # Equipo:
@@ -95,30 +100,40 @@ Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para 
 * Se identifivó y modificó la variable streams la cual estaba en formato texto a formato número. 
 
 * Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
+
 ![alt text](imagen1.png)
 
 * Se crearon nuevas variables:
+
 1. fecha_released: concatenando día, mes y año. 
+
 2. total_playlist: sumando in_spotify_playlists e in_spotify_charts.
+
 3. season: estaciones del año.
+
 4. Cuartiles y categoría: Se asignó según la segmentación de cuartiles la categoría "alto" y "bajo" a cada característica de canción de la tabla technical info de la siguiente forma:
+
 ![alt text](imagen2.png)
 
 # -Hacer un análisis exploratorio (AED).
 * Importamos datos desde BigQuery hacia PowerBi.
 
 * Se realizó ténicas de agrupación según variables categóricas, obteniendo la cantidad de canciones por artista y por año de lanzamiento. Obtenemos la siguiente tabla:
+
 ![alt text](imagen3.png)
 
 * Se aplicó medidas de tendencia central con la ayuda del lenguaje de Python para visualizar distribución a través de un histograma:
+
 ![alt text](imagen4.png)
 
 ![alt text](imagen5.png)
 
 * Identificar los artistas con más número de canciones, más streams y presencia en mayor número de playlist: Creación de una matriz, filas - variable artists_name, valores -count of track_name, SUM stremas_int64 y SUM total_playlists.
+
 ![alt text](imagen6.png)
 
 * Identificar las canciones con más streams, en mayor número de playlist:creacion de una matriz, fila- track_name, valores- SUM de streams_int64 y SUM total_playlist.
+
 ![alt text](imagen7.png)
 
 # -Presentación de resultados.
@@ -200,7 +215,11 @@ Speechiness: -0.112763169712
 
 # Conclusiones:
 
-![alt text](Imagen1.png)
+* Popularidad en Múltiples Plataformas: Las canciones que son populares en Spotify tienden a ser populares en otras plataformas como Deezer, Apple Music y Shazam. Esto sugiere que una estrategia de promoción que abarque múltiples plataformas puede ser efectiva para aumentar el éxito de una canción.
+
+* La presencia de una canción en un mayor número de playlists tiene una relación fuerte y positiva con la cantidad de streams. Esto indica que una estrategia de inclusión en playlists, tanto oficiales como de usuarios, es crucial para aumentar los streams.
+
+* Los artistas con un mayor número de canciones en Spotify tienden a tener más streams en total. Esto sugiere que una mayor producción y publicación de contenido puede contribuir al éxito en términos de streams.
 
 # Enlaces de interés:
 
