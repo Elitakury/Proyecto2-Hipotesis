@@ -66,6 +66,7 @@ Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para 
 *Se crearon nuevas variables:
 1. fecha_released: concatenando día, mes y año. 
 2. totak_playlist: sumando in_spotify_playlists e in_spotify_charts.
+
 *Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
 
 # -Hacer un análisis exploratorio (AED).
