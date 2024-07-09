@@ -162,35 +162,34 @@ Los artistas con un mayor número de canciones en Spotify tienen más streams.
 
 Respuesta: Dado que el valor de la correlación es alto (0.77892616317456), podemos concluir que existe una relación fuerte y positiva entre el número de canciones que un artista tiene en Spotify y la cantidad total de streams que recibe. Esto sugiere que los artistas con más canciones tienden a tener más streams.
 
-# * Hipótesis 5: 
+# Hipótesis 5: 
 Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
 
- # Correlación streams vs danceability: 
- -0.105501164099
+ * Correlación streams vs danceability: -0.105501164099
 
 ![alt text](imagen10.png)
 
- # Streams con valency: -0.041370563742
+ * Correlación streams con valency: -0.041370563742
 
  ![alt text](imagen11.png)
 
-# Streams con acousticness: -0.0052737047472
+ * Correlación streams con acousticness: -0.0052737047472
 
  ![alt text](imagen12.png)
 
-# Streams con energy: -0.025626822823
+ * Correlación streams con energy: -0.025626822823
 
  ![alt text](imagen13.png)
 
-# Streams con instrumentalnes: -0.04423444890059
+ * Correlación streams con instrumentalnes: -0.04423444890059
 
  ![alt text](imagen14.png)
 
-# Streams con liveness: -0.049480680490
+ * Correlación streams con liveness: -0.049480680490
 
  ![alt text](imagen15.png)
 
- # Streams con speechiness: -0.112763169712
+ * Correlacióntreams con speechiness: -0.112763169712
 
 ![alt text](imagen16.png)
 
