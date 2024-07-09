@@ -139,25 +139,23 @@ Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en término
 
 Respuesta: Se rechaza la hipótesis de que las canciones con un mayor BPM tienen más éxito en términos de cantidad de streams en Spotify, ya que el valor de la correlación obtenido (-0.002336203586) indica que no existe una relación significativa entre estas variables.
 
-# * Hipótesis 2: 
+# Hipótesis 2: 
 Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.
 
 ![alt text](imagen5.png)
-
 ![alt text](imagen6.png)
-
 ![alt text](imagen7.png)
 
 Respuesta:  La hipótesis es aceptada, porque los valores de las correlaciones, que son 0.5999860553480 para Deezer, 0.5515564831921 para Apple Music, y 0.605488541573 para Shazam, indican una relación moderada a fuerte, lo que sugiere que las canciones populares en Spotify tienden a ser populares también en estas otras plataformas.
 
-# * Hipótesis 3: 
+# Hipótesis 3: 
 La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.
 
 ![alt text](imagen8.png)
 
 Respuesta: El valor de la correlación obtenido (0.783568569951) indica una relación fuerte y positiva, sugiriendo que las canciones que aparecen en más playlists tienden a tener más streams.
 
-# * Hipótesis 4: 
+# Hipótesis 4: 
 Los artistas con un mayor número de canciones en Spotify tienen más streams.
 
 ![alt text](imagen9.png)
@@ -167,7 +165,8 @@ Respuesta: Dado que el valor de la correlación es alto (0.77892616317456), pode
 # * Hipótesis 5: 
 Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
 
- # Streams con danceability: -0.105501164099
+ # Correlación streams vs danceability: 
+ -0.105501164099
 
 ![alt text](imagen10.png)
 
@@ -196,7 +195,6 @@ Las características de la canción influyen en el éxito en términos de cantid
 ![alt text](imagen16.png)
 
 Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy bajos, lo cual indica que no existe una relación significativa entre estas características de las canciones y su éxito en términos de cantidad de streams en Spotify. Ninguna de las características evaluadas parece tener un impacto considerable en el número de streams.
-Los valores de correlación obtenidos son:
 
 # Conclusiones:
 
