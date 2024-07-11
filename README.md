@@ -141,6 +141,63 @@ WHERE
 
 * Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
 
+``` sql
+CREATE OR REPLACE TABLE `proyecto-2-hipotesis-426821.dataset_hipotesis.consolidado` AS
+SELECT
+S.track_id,
+S.track_name,
+S.artist_s__name,
+S.artist_count,
+S.released_day,
+S.released_month,
+S.released_year,
+S.fecha_released,
+S.in_spotify_charts,
+S.in_spotify_playlists,
+S.streams_int64,
+S.total_playlists,
+C.in_apple_charts,
+C.in_apple_playlists,
+C.in_deezer_charts,
+C.in_deezer_playlists,
+C.in_shazam_charts,
+T.bpm,
+T.`acousticness_%`,
+T.`danceability_%`,
+T.`energy_%`,
+T.`instrumentalness_%`,
+T.`liveness_%`,
+T.`speechiness_%`,
+T.`valence_%`,
+Q.bpm_category,
+Q.streams_category,
+Q.acousticness_category,
+Q.danceability_category,
+Q.energy_category,
+Q.instrumentalness_category,
+Q.liveness_category,
+Q.speechiness_category,
+Q.valence_category
+FROM `proyecto-2-hipotesis-426821.dataset_hipotesis.view_track_in_spotify_clean` AS S
+LEFT JOIN
+`proyecto-2-hipotesis-426821.dataset_hipotesis.view_in_competition_clean` AS C
+ON
+S.track_id = C.track_id
+LEFT JOIN
+ `proyecto-2-hipotesis-426821.dataset_hipotesis.view_track_technical_info_clean` AS T
+ON
+S.track_id = T.track_id
+LEFT JOIN
+ `proyecto-2-hipotesis-426821.dataset_hipotesis.categoria` AS Q
+ON
+ T.track_id = Q.track_id
+ORDER BY
+ S.artist_s__name,
+ S.released_year,
+ S.released_month,
+ S.released_day;
+```
+
 * Se crearon nuevas variables:
 
 1. fecha_released: concatenando día, mes y año. 
@@ -150,6 +207,97 @@ WHERE
 3. season: estaciones del año.
 
 4. Cuartiles y categoría: Se asignó según la segmentación de cuartiles la categoría "alto" y "bajo" a cada característica de canción de la tabla technical info de la siguiente forma:
+
+``` sql
+CREATE OR REPLACE VIEW `proyecto-2-hipotesis-426821.dataset_hipotesis.quartiles` AS
+  SELECT
+	track_id,
+	streams_int64,
+	bpm,
+	`acousticness_%`,
+	`danceability_%`,
+	`energy_%`,
+	`instrumentalness_%`,
+	`liveness_%`,
+	`speechiness_%`,
+	`valence_%`,
+	NTILE(4) OVER (ORDER BY bpm) AS q_bpm,
+	NTILE(4) OVER (ORDER BY streams_int64) AS q_streams,
+	NTILE(4) OVER (ORDER BY `danceability_%`) AS q_danceability,
+	NTILE(4) OVER (ORDER BY `valence_%`) AS q_valence,
+	NTILE(4) OVER (ORDER BY `energy_%`) AS q_energy,
+	NTILE(4) OVER (ORDER BY `acousticness_%`) AS q_acousticness,
+	NTILE(4) OVER (ORDER BY `instrumentalness_%`) AS q_instrumentalness,
+	NTILE(4) OVER (ORDER BY `liveness_%`) AS q_liveness,
+	NTILE(4) OVER (ORDER BY `speechiness_%`) AS q_speechiness
+  FROM
+	`proyecto-2-hipotesis-426821.dataset_hipotesis.consolidado`
+  WHERE streams_int64 IS NOT NULL
+```
+```sql
+CREATE OR REPLACE VIEW `proyecto-2-hipotesis-426821.dataset_hipotesis.categoria` AS
+SELECT
+  a.track_id,
+  a.streams_int64,
+  a.bpm,
+  a.`acousticness_%`,
+  a.`danceability_%`,
+  a.`energy_%`,
+  a.`instrumentalness_%`,
+  a.`liveness_%`,
+  a.`speechiness_%`,
+  a.`valence_%`,
+  q.q_bpm,
+  q.q_streams,
+  q.q_danceability,
+  q.q_valence,
+  q.q_energy,
+  q.q_acousticness,
+  q.q_instrumentalness,
+  q.q_liveness,
+  q.q_speechiness,
+  CASE
+	WHEN q.q_bpm IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_bpm = 4 THEN "Alto"
+  END AS bpm_category,
+  CASE
+	WHEN q.q_streams IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_streams = 4 THEN "Alto"
+  END AS streams_category,
+  CASE
+	WHEN q.q_danceability IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_danceability = 4 THEN "Alto"
+  END AS danceability_category,
+  CASE
+	WHEN q.q_valence IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_valence = 4 THEN "Alto"
+  END AS valence_category,
+  CASE
+	WHEN q.q_energy IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_energy = 4 THEN "Alto"
+  END AS energy_category,
+  CASE
+	WHEN q.q_acousticness IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_acousticness = 4 THEN "Alto"
+  END AS acousticness_category,
+  CASE
+	WHEN q.q_instrumentalness IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_instrumentalness = 4 THEN "Alto"
+  END AS instrumentalness_category,
+  CASE
+	WHEN q.q_liveness IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_liveness = 4 THEN "Alto"
+  END AS liveness_category,
+  CASE
+	WHEN q.q_speechiness IN (1, 2, 3) THEN "Bajo"
+	WHEN q.q_speechiness = 4 THEN "Alto"
+  END AS speechiness_category
+FROM
+  `proyecto-2-hipotesis-426821.dataset_hipotesis.consolidado` a
+LEFT JOIN `proyecto-2-hipotesis-426821.dataset_hipotesis.quartiles` q
+ON a.track_id = q.track_id
+WHERE a.streams_int64 IS NOT NULL;
+```
 
 # Visualización y análisis de datos
 * Importamos datos desde BigQuery hacia PowerBi.
