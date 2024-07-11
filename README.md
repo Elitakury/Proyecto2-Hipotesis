@@ -30,6 +30,7 @@ Elizabeth Takury y Natalia Alejandro.
 * Loom
 # 2.Lenguajes:
 * Lenguaje SQL en BigQuery.
+* Lenguaje Python en PowerBi.
  
 # Descripción de las variables del dataset
 # Trackinspotify
@@ -94,6 +95,44 @@ Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para 
 * Se identificó valores nulos y valores duplicados, además de carácteres raros.
 
 * No se tomaron en cuenta los siguientes id: '5080031', '3814670', '8173823', '1119309', '0:00'.
+
+``` sql
+WITH solo_artist_songs AS (
+ SELECT
+   artist_s__name AS artist_name,
+   COUNT(track_id) AS total_songs
+ FROM `proyecto-2-hipotesis-426821.dataset_hipotesis.track_in_spotify`
+ WHERE
+   artist_count = 1
+ GROUP BY
+   artist_s__name
+)
+SELECT
+ T1.track_id,
+ REGEXP_REPLACE(T1.track_name, r'[^a-zA-Z0-9\s]', ' ') AS track_name,
+ REGEXP_REPLACE(T1.artist_s__name, r'[^a-zA-Z0-9\s]', ' ') AS artist_s__name,
+ T1.artist_count,
+ T1.released_year,
+ T1.released_month,
+ T1.released_day,
+ CAST(CONCAT(CAST(T1.released_year AS STRING), '-',
+ LPAD(CAST(T1.released_month AS STRING), 2, '0'), '-',
+ LPAD(CAST(T1.released_day AS STRING), 2, '0')) AS DATE) AS fecha_released,
+ T1.in_spotify_playlists,
+ T1.in_spotify_charts,
+ SAFE_CAST(IF(REGEXP_CONTAINS(T1.streams, r'^[0-9]+$'), T1.streams, NULL) AS INT64) AS streams_int64,
+ T1.in_spotify_playlists + T2.in_apple_playlists + T2.in_deezer_playlists AS total_playlists,
+ SAS.total_songs AS solo_artist_total_songs
+FROM
+ `proyecto-2-hipotesis-426821.dataset_hipotesis.track_in_spotify` AS T1
+JOIN
+ `proyecto-2-hipotesis-426821.dataset_hipotesis.track_in_competition` AS T2
+ ON T1.track_id = T2.track_id
+LEFT JOIN
+ solo_artist_songs AS SAS
+ ON T1.artist_s__name = SAS.artist_name
+WHERE
+ T1.track_id NOT IN ('5080031', '3814670', '8173823', '1119309', '0:00', '4061483', '5865058','6720570'); ```
 
 * Se identificaron que las variables key y mode dentro de la tabla de technical info no son útiles dentro del análisis. 
 
