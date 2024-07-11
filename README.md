@@ -132,7 +132,8 @@ LEFT JOIN
  solo_artist_songs AS SAS
  ON T1.artist_s__name = SAS.artist_name
 WHERE
- T1.track_id NOT IN ('5080031', '3814670', '8173823', '1119309', '0:00', '4061483', '5865058','6720570'); ```
+ T1.track_id NOT IN ('5080031', '3814670', '8173823', '1119309', '0:00', '4061483', '5865058','6720570');
+```
 
 * Se identificaron que las variables key y mode dentro de la tabla de technical info no son útiles dentro del análisis. 
 
