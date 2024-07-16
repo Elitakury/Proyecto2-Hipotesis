@@ -386,14 +386,19 @@ Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy 
 
 # Conclusiones:
 
-* Popularidad en Múltiples Plataformas: Las canciones que son populares en Spotify tienden a ser populares en otras plataformas como Deezer, Apple Music y Shazam. Esto sugiere que una estrategia de promoción que abarque múltiples plataformas puede ser efectiva para aumentar el éxito de una canción.
-
-* La presencia de una canción en un mayor número de playlists tiene una relación fuerte y positiva con la cantidad de streams. Esto indica que una estrategia de inclusión en playlists, tanto oficiales como de usuarios, es crucial para aumentar los streams.
-
-* Los artistas con un mayor número de canciones en Spotify tienden a tener más streams en total. Esto sugiere que una mayor producción y publicación de contenido puede contribuir al éxito en términos de streams.
+* Popularidad en Múltiples Plataformas (hipotesis 2): Las canciones populares en Spotify tienden a ser populares en otras plataformas como Deezer, Apple Music y Shazam. Una estrategia de promoción que abarque múltiples plataformas puede ser efectiva para aumentar el éxito de una canción.
+  
+* Presencia en Playlists(hipotesis 3): Existe una relación fuerte y positiva entre la presencia de una canción en un mayor número de playlists y la cantidad de streams. Incluir canciones en playlists, tanto oficiales como de usuarios, es crucial para aumentar los streams.
+  
+* Número de Canciones del Artista (hipotesis 4): Los artistas con un mayor número de canciones en Spotify tienden a tener más streams en total. Una mayor producción y publicación de contenido contribuye al éxito en términos de streams.
+  
+* Características de la Canción(hipotesis 1 y 5): Las características específicas de las canciones (como BPM, danzabilidad, valencia) no impactan significativamente en los streams. Es más efectivo enfocarse en otros factores como el marketing y la inclusión en playlists.
 
 # Recomendaciones:
 
+* Playlists y Streams: procurar que las canciones sean añadidas a la mayor cantidad de playlists posible. La inclusión en playlists debe ser una parte clave de la estrategia de lanzamiento.
+  
+* Número de Canciones del Artista y Streams: lanzar más de una canción y construir un catálogo más amplio, esto puede aumentar significativamente los números de streaming.
 
 # Enlaces de interés:
 
