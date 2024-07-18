@@ -402,3 +402,7 @@ Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy 
 
 # Enlaces de interés:
 
+Presentación en loom: https://www.loom.com/share/75d96c0cf2f645009b17bb91a451db6e?sid=9e0bb762-cf49-4158-8212-150972341e2f
+Dashboard: file:///C:/Users/FAM.%20TACURI/AppData/Local/Temp/Power%20BI%20Desktop/print-job-41128431-3c9f-4785-8b33-29432621732b/Proyecto2_Hipotesis.pdf
+BigQuery: https://console.cloud.google.com/bigquery?hl=es-419&project=proyecto-2-hipotesis-426821&supportedpurview=project&ws=!1m0
+
