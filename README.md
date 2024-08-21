@@ -6,21 +6,20 @@ Explorar un conjunto de datos con el fin de identificar patrones o característi
 un extenso dataset de Spotify con información sobre las canciones más escuchadas en 2023.
 Las respuestas obtenidas nos ayudarán a realizar la validación de las siguientes hipótesis:
 
-1.Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify.
+H1.Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify.
 
-2.Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.
+H2.Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.
 
-3.La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.
+H3.La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.
 
-4.Los artistas con un mayor número de canciones en Spotify tienen más streams.
+H4.Los artistas con un mayor número de canciones en Spotify tienen más streams.
 
-5.Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
+H5.Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
 
 # Equipo:
 Trabajo realizado de forma grupal.
 Elizabeth Takury y Natalia Alejandro. 
-
-# Herramientas y Tecnologías:
+# METODOLOGÍA
 # 1.Herramientas:
 * Google Sheets
 * BigQuery
@@ -28,11 +27,13 @@ Elizabeth Takury y Natalia Alejandro.
 * ChatGPT 
 * Google Slides 
 * Loom
+  
 # 2.Lenguajes:
 * Lenguaje SQL en BigQuery.
 * Lenguaje Python en PowerBi.
  
-# Descripción de las variables del dataset
+# 3.Descripción de las variables del dataset
+Los datos se dividen en 3 tablas, la primera sobre el rendimiento de cada canción en Spotify, la segunda con el rendimiento en otras plataformas como Deezer o Apple Music, y la tercera con las características de estas canciones.
 # Trackinspotify
 - track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 
@@ -88,56 +89,46 @@ Elizabeth Takury y Natalia Alejandro.
 - liveness_: Presencia de elementos de actuación en vivo.
 
 - speechiness_: Cantidad de palabras habladas en la canción.
+  
 # Procesamiento y preparación de datos:
 
-Previo al análisis, importamos el dataset a un nuevo proyecto en BigQuery para proceder con la depuración de los datos. 
+Creación del Proyecto y Conjunto de Datos en BigQuery:
 
-* Se identificó valores nulos y valores duplicados, además de carácteres raros.
+Proyecto: proyecto2-hipotesis-426821
+Tablas importadas: track_in_competition, track_in_spotify, track_technical_info
 
-* No se tomaron en cuenta los siguientes id: '5080031', '3814670', '8173823', '1119309', '0:00'.
+Identificación de nulos y duplicados:
 
+* Identificador Único: track_id
+* Nulos:Comandos SQL utilizados: COUNT, WHERE, IS NULL: En track_in_competition: 50 nulos en shazam_charts En track_in_spotify: No hay nulos En track_technicalinfo: 95 nulos en key
+* Duplicados: Comandos SQL utilizados: COUNT, GROUP BY, HAVING: 4 duplicados en track_in_spotify.
+
+# Ejemplo de consulta para nulos
 ``` sql
-WITH solo_artist_songs AS (
- SELECT
-   artist_s__name AS artist_name,
-   COUNT(track_id) AS total_songs
- FROM `proyecto-2-hipotesis-426821.dataset_hipotesis.track_in_spotify`
- WHERE
-   artist_count = 1
- GROUP BY
-   artist_s__name
-)
-SELECT
- T1.track_id,
- REGEXP_REPLACE(T1.track_name, r'[^a-zA-Z0-9\s]', ' ') AS track_name,
- REGEXP_REPLACE(T1.artist_s__name, r'[^a-zA-Z0-9\s]', ' ') AS artist_s__name,
- T1.artist_count,
- T1.released_year,
- T1.released_month,
- T1.released_day,
- CAST(CONCAT(CAST(T1.released_year AS STRING), '-',
- LPAD(CAST(T1.released_month AS STRING), 2, '0'), '-',
- LPAD(CAST(T1.released_day AS STRING), 2, '0')) AS DATE) AS fecha_released,
- T1.in_spotify_playlists,
- T1.in_spotify_charts,
- SAFE_CAST(IF(REGEXP_CONTAINS(T1.streams, r'^[0-9]+$'), T1.streams, NULL) AS INT64) AS streams_int64,
- T1.in_spotify_playlists + T2.in_apple_playlists + T2.in_deezer_playlists AS total_playlists,
- SAS.total_songs AS solo_artist_total_songs
-FROM
- `proyecto-2-hipotesis-426821.dataset_hipotesis.track_in_spotify` AS T1
-JOIN
- `proyecto-2-hipotesis-426821.dataset_hipotesis.track_in_competition` AS T2
- ON T1.track_id = T2.track_id
-LEFT JOIN
- solo_artist_songs AS SAS
- ON T1.artist_s__name = SAS.artist_name
-WHERE
- T1.track_id NOT IN ('5080031', '3814670', '8173823', '1119309', '0:00', '4061483', '5865058','6720570');
+SELECT * 
+FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.track_in_competition`
+WHERE in_apple_playlists IS NULL OR in_apple_charts IS NULL OR in_deezer_charts IS NULL OR in_deezer_playlists IS NULL OR in_shazam_charts IS NULL;
+
+# la columna in_shazam_charts tiene nulos #
+
+SELECT 
+COUNT(*) 
+FROM `proyecto2-hipotesis-426821.Dataset_hipotesis.track_in_competition`
+WHERE in_shazam_charts IS NULL
+
+# son 50 nulos #
 ```
+* Manejo de nudos:
+	* Se decidió mantener los nulos en track_in_competition .
+* Eliminación de variables no útiles:
+	* Se eliminaron dos variables de track_technical_info y una de track_in_spotify utilizando SELECT EXCEPT.
+* Manejo de datos discrepantes:
+	* Variables Categóricas: Uso de LIKEy REGEXPpara manejar nombres con símbolos extraños.
+	* Variables Numéricas: Uso de MAX, MIN, AVGpara identificar valores discrepantes.
+*Uso de CASTpara modificar tipos de datos: CASTse utiliza en lugar de UPDATEpara evitar modificar la tabla original y mantener una copia original del conjunto de datos.
+*Creación de Variables Adicionales:
+	* Variables de fecha_released , total_playlist y streams_int64 utilizando CONCAT, CAST, LPADy DATE
 
-* Se identificaron que las variables key y mode dentro de la tabla de technical info no son útiles dentro del análisis. 
-
-* Se identifivó y modificó la variable streams la cual estaba en formato texto a formato número. 
 
 * Se realizó un consolidado junto con las nuevas variables usando LEFT JOIN y la vista (view) con los datos limpios de cada tabla.
 
