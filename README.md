@@ -19,7 +19,7 @@ H5.Las características de la canción influyen en el éxito en términos de can
 # Equipo:
 Trabajo realizado de forma grupal.
 Elizabeth Takury y Natalia Alejandro. 
-# METODOLOGÍA
+# Metodología
 # 1.Herramientas:
 * Google Sheets
 * BigQuery
@@ -34,7 +34,7 @@ Elizabeth Takury y Natalia Alejandro.
  
 # 3.Descripción de las variables del dataset
 Los datos se dividen en 3 tablas, la primera sobre el rendimiento de cada canción en Spotify, la segunda con el rendimiento en otras plataformas como Deezer o Apple Music, y la tercera con las características de estas canciones.
-# Trackinspotify
+# # trackinspotify
 - track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 
 - track_name: Nombre de la canción
