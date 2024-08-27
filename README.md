@@ -1,7 +1,20 @@
 # Proyecto2-Hipotesis
-# Contexto: 
+## Índice
+
+- [Contexto](#contexto)
+- [Objetivo](#objetivo)
+- [Equipo](#equipo)
+- [Metodología](#metodología)
+- [Procesamiento y preparación de datos](#procesamiento-y-preparación-de-datos)
+- [Visualización y análisis de datos](#Visualización-y-análisis-de-datos)
+- [Presentación de resultados](#Presentación-de-resultados)
+- [Conclusiones](#conclusiones)
+- [Recomendaciones](#recomendaciones)
+
+
+## Contexto: 
 Una discográfica se enfrenta al emocionante desafío de lanzar un nuevo artista en el escenario musical global.
-# Objetivo:
+## Objetivo:
 Explorar un conjunto de datos con el fin de identificar patrones o características que puedan determinar los factores que contribuyen al éxito de una canción teniendo como herramienta 
 un extenso dataset de Spotify con información sobre las canciones más escuchadas en 2023.
 Las respuestas obtenidas nos ayudarán a realizar la validación de las siguientes hipótesis:
@@ -16,10 +29,10 @@ H4.Los artistas con un mayor número de canciones en Spotify tienen más streams
 
 H5.Las características de la canción influyen en el éxito en términos de cantidad de streams en Spotify.
 
-# Equipo:
+## Equipo:
 Trabajo realizado de forma grupal.
 Elizabeth Takury y Natalia Alejandro. 
-# Metodología
+## Metodología
 # 1.Herramientas:
 * Google Sheets
 * BigQuery
@@ -34,7 +47,7 @@ Elizabeth Takury y Natalia Alejandro.
  
 # 3.Descripción de las variables del dataset
 Los datos se dividen en 3 tablas, la primera sobre el rendimiento de cada canción en Spotify, la segunda con el rendimiento en otras plataformas como Deezer o Apple Music, y la tercera con las características de estas canciones.
-# # trackinspotify
+# trackinspotify
 - track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 
 - track_name: Nombre de la canción
@@ -54,7 +67,7 @@ Los datos se dividen en 3 tablas, la primera sobre el rendimiento de cada canci�
 - inspotifycharts: Presencia y ranking de la canción en las listas de Spotify
 
 - streams: Número total de transmisiones en Spotify. Representa la cantidad de veces que la canción fue escuchada.
-# Trackincompetition
+# trackincompetition
 
 - track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 
@@ -67,7 +80,7 @@ Los datos se dividen en 3 tablas, la primera sobre el rendimiento de cada canci�
 - indeezercharts: Presencia y rango de la canción en las listas de Deezer
 
 - inshazamcharts: Presencia y rango de la canción en las listas de Shazam
-# Tracktechnicalinfo
+# tracktechnicalinfo
 - track_id: Identificador único de la canción. Es un número entero de 7 dígitos que no se repite
 
 - bpm: Pulsaciones por minuto, una medida del tiempo de la canción.
@@ -90,17 +103,17 @@ Los datos se dividen en 3 tablas, la primera sobre el rendimiento de cada canci�
 
 - speechiness_: Cantidad de palabras habladas en la canción.
   
-# Procesamiento y preparación de datos:
+## Procesamiento y preparación de datos:
 
 Creación del Proyecto y Conjunto de Datos en BigQuery:
 
-Proyecto: proyecto2-hipotesis-426821
-Tablas importadas: track_in_competition, track_in_spotify, track_technical_info
+* Proyecto: proyecto2-hipotesis-426821
+* Tablas importadas: track_in_competition, track_in_spotify, track_technical_info
 
 Identificación de nulos y duplicados:
 
 * Identificador Único: track_id
-* Nulos:Comandos SQL utilizados: COUNT, WHERE, IS NULL: En track_in_competition: 50 nulos en shazam_charts En track_in_spotify: No hay nulos En track_technicalinfo: 95 nulos en key
+* Nulos: Comandos SQL utilizados: COUNT, WHERE, IS NULL: En track_in_competition: 50 nulos en shazam_charts En track_in_spotify: No hay nulos En track_technicalinfo: 95 nulos en key
 * Duplicados: Comandos SQL utilizados: COUNT, GROUP BY, HAVING: 4 duplicados en track_in_spotify.
 
 # Ejemplo de consulta para nulos
@@ -290,7 +303,7 @@ ON a.track_id = q.track_id
 WHERE a.streams_int64 IS NOT NULL;
 ```
 
-# Visualización y análisis de datos
+## Visualización y análisis de datos
 * Importamos datos desde BigQuery hacia PowerBi.
 
 * Se realizó ténicas de agrupación según variables categóricas, obteniendo la cantidad de canciones por artista y por año de lanzamiento. Obtenemos la siguiente tabla:
@@ -309,10 +322,10 @@ WHERE a.streams_int64 IS NOT NULL;
 
 ![alt text](imagen3.png)
 
-# -Presentación de resultados.
+## -Presentación de resultados.
 
 Validación de hipótesis 
-# * Hipótesis 1: 
+# Hipótesis 1: 
 Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify 
 
 ![alt text](imagen4.png)
@@ -375,7 +388,7 @@ Las características de la canción influyen en el éxito en términos de cantid
 
 Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy bajos, lo cual indica que no existe una relación significativa entre estas características de las canciones y su éxito en términos de cantidad de streams en Spotify. Ninguna de las características evaluadas parece tener un impacto considerable en el número de streams.
 
-# Conclusiones:
+## Conclusiones:
 
 * Popularidad en Múltiples Plataformas (hipotesis 2): Las canciones populares en Spotify tienden a ser populares en otras plataformas como Deezer, Apple Music y Shazam. Una estrategia de promoción que abarque múltiples plataformas puede ser efectiva para aumentar el éxito de una canción.
   
@@ -385,7 +398,7 @@ Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy 
   
 * Características de la Canción(hipotesis 1 y 5): Las características específicas de las canciones (como BPM, danzabilidad, valencia) no impactan significativamente en los streams. Es más efectivo enfocarse en otros factores como el marketing y la inclusión en playlists.
 
-# Recomendaciones:
+## Recomendaciones:
 
 * Playlists y Streams: procurar que las canciones sean añadidas a la mayor cantidad de playlists posible. La inclusión en playlists debe ser una parte clave de la estrategia de lanzamiento.
   
