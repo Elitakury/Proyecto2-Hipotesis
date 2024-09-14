@@ -316,12 +316,12 @@ WHERE a.streams_int64 IS NOT NULL;
   * Histograma BPM:
   Muestra la distribución de BPM en el conjunto de datos. Los BPM varían entre 75 y 200, con una mayor concentración en los rangos más bajos. Esto sugiere que las canciones con BPM más lentos son más comunes en el conjunto de datos.
 
-![alt text](imagen2.png)
+![imagen2.png](Imagenes/imagen2.png)
 
  * Histograma Streams:
  Muestra la frecuencia en la cantidad de veces que una canción fue escuchada. En su mayoría están concentradas en el primer intervalo (lado izquierdo) esto sugiere que 
 
-![alt text](imagen3.png)
+![imagen3.png](Imagenes/imagen3.png)
 
 ## -Presentación de resultados.
 
@@ -329,30 +329,30 @@ Validación de hipótesis
 * Hipótesis 1: 
 Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify 
 
-![alt text](imagen4.png)
+![imagen4.png](Imagenes/imagen4.png)
 
 Respuesta: Se rechaza la hipótesis de que las canciones con un mayor BPM tienen más éxito en términos de cantidad de streams en Spotify, ya que el valor de la correlación obtenido (-0.002336203586) indica que no existe una relación significativa entre estas variables.
 
 * Hipótesis 2: 
 Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.
 
-![alt text](imagen5.png)
-![alt text](imagen6.png)
-![alt text](imagen7.png)
+![imagen5.png](Imagenes/imagen5.png)
+![imagen6.png](Imagenes/imagen6.png)
+![imagen7.png](Imagenes/imagen7.png)
 
 Respuesta:  La hipótesis es aceptada, porque los valores de las correlaciones, que son 0.5999860553480 para Deezer, 0.5515564831921 para Apple Music, y 0.605488541573 para Shazam, indican una relación moderada a fuerte, lo que sugiere que las canciones populares en Spotify tienden a ser populares también en estas otras plataformas.
 
 * Hipótesis 3: 
 La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.
 
-![alt text](imagen8.png)
+![imagen8.png](Imagenes/imagen8.png)
 
 Respuesta: El valor de la correlación obtenido (0.783568569951) indica una relación fuerte y positiva, sugiriendo que las canciones que aparecen en más playlists tienden a tener más streams.
 
 * Hipótesis 4: 
 Los artistas con un mayor número de canciones en Spotify tienen más streams.
 
-![alt text](imagen9.png)
+![imagen9.png](Imagenes/imagen9.png)
 
 Respuesta: Dado que el valor de la correlación es alto (0.77892616317456), podemos concluir que existe una relación fuerte y positiva entre el número de canciones que un artista tiene en Spotify y la cantidad total de streams que recibe. Esto sugiere que los artistas con más canciones tienden a tener más streams.
 
@@ -361,31 +361,31 @@ Las características de la canción influyen en el éxito en términos de cantid
 
  * Correlación streams vs danceability: -0.105501164099
 
-![alt text](imagen10.png)
+![imagen10.png](Imagenes/imagen10.png)
 
  * Correlación streams con valency: -0.041370563742
 
- ![alt text](imagen11.png)
+![imagen11.png](Imagenes/imagen11.png)
 
  * Correlación streams con acousticness: -0.0052737047472
 
- ![alt text](imagen12.png)
+![imagen12.png](Imagenes/imagen12.png)
 
  * Correlación streams con energy: -0.025626822823
 
- ![alt text](imagen13.png)
+![imagen13.png](Imagenes/imagen13.png)
 
  * Correlación streams con instrumentalnes: -0.04423444890059
 
- ![alt text](imagen14.png)
+![imagen14.png](Imagenes/imagen14.png)
 
  * Correlación streams con liveness: -0.049480680490
 
- ![alt text](imagen15.png)
+![imagen15.png](Imagenes/imagen15.png)
 
  * Correlacióntreams con speechiness: -0.112763169712
 
-![alt text](imagen16.png)
+![imagen16.png](Imagenes/imagen16.png)
 
 Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy bajos, lo cual indica que no existe una relación significativa entre estas características de las canciones y su éxito en términos de cantidad de streams en Spotify. Ninguna de las características evaluadas parece tener un impacto considerable en el número de streams.
 
