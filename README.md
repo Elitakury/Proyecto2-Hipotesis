@@ -6,11 +6,11 @@
 - [Equipo](#equipo)
 - [Metodología](#metodología)
 - [Procesamiento y preparación de datos](#procesamiento-y-preparación-de-datos)
-- [Visualización y análisis de datos](#Visualización-y-análisis-de-datos)
-- [Presentación de resultados](#Presentación-de-resultados)
+- [Visualización y análisis de datos](#visualización-y-análisis-de-datos)
+- [Presentación de resultados](#presentación-de-resultados)
 - [Conclusiones](#conclusiones)
 - [Recomendaciones](#recomendaciones)
-
+- [Enlaces de interés](#enlaces-de-interés)
 
 ## Contexto: 
 Una discográfica se enfrenta al emocionante desafío de lanzar un nuevo artista en el escenario musical global.
@@ -404,7 +404,7 @@ Respuesta: Los valores de las correlaciones obtenidos son todos negativos y muy 
   
 * Número de Canciones del Artista y Streams: lanzar más de una canción y construir un catálogo más amplio, esto puede aumentar significativamente los números de streaming.
 
-# Enlaces de interés:
+## Enlaces de interés:
 
 Presentación en loom: https://www.loom.com/share/75d96c0cf2f645009b17bb91a451db6e?sid=9e0bb762-cf49-4158-8212-150972341e2f
 
