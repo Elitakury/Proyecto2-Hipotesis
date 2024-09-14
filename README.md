@@ -309,6 +309,8 @@ WHERE a.streams_int64 IS NOT NULL;
 * Se realizó ténicas de agrupación según variables categóricas, obteniendo la cantidad de canciones por artista y por año de lanzamiento. Obtenemos la siguiente tabla:
 
 ![alt text](imagen1.png)
+![imagen1.png](URL-de-la-imagen)
+
 
 * Se aplicó medidas de tendencia central con la ayuda del lenguaje de Python para visualizar distribución a través de un histograma:
 
